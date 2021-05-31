@@ -1,5 +1,5 @@
 <template>
-  <form class="card auth-card">
+  <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
@@ -38,13 +38,24 @@
         </small>
       </div>
       <div class="input-field">
-        <input id="name" type="text" class="validate" />
+        <input
+          id="name"
+          type="text"
+          v-model.trim="name"
+          :class="{invalid: $v.name.$dirty && !$v.name.required}"
+
+        >
         <label for="name">Имя</label>
-        <small class="helper-text invalid">Name</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.name.$dirty && !$v.name.required"
+        >
+          Введите ваше имя
+        </small>
       </div>
       <p>
         <label>
-          <input type="checkbox" />
+          <input type="checkbox" v-model="agree" />
           <span>С правилами согласен</span>
         </label>
       </p>
@@ -81,6 +92,24 @@ export default {
     password: { required, minLength: minLength(6) },
     name: { required },
     agree: { checked: v => v }
+  },
+  methods: {
+    submitHandler () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
+      const formData = {
+        email: this.email,
+        password: this.password,
+        name: this.name
+      }
+
+      console.log(formData)
+
+      this.$router.push('/')
+    }
   }
 }
 </script>
