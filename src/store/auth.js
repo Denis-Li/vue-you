@@ -7,6 +7,7 @@ export default {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
       } catch (e) {
+        commit('setError', e)
         throw e
       }
     },
@@ -19,6 +20,7 @@ export default {
           name
         })
       } catch (e) {
+        commit('setError', e)
         throw e
       }
     },
