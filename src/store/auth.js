@@ -11,7 +11,7 @@ export default {
         throw e
       }
     },
-    async register({dispatch}, {email, password, name}) {
+    async register({dispatch, commit}, {email, password, name}) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
         const uid = await dispatch('getUid')
