@@ -7,7 +7,8 @@
         <p
           v-for="cur of currencies"
           :key="cur"
-          class="currency-line">
+          class="currency-line"
+        >
           <span>
             {{ getCurrency(cur) | currency(cur) }}
           </span>
@@ -25,8 +26,8 @@ export default {
     currencies: ['PLN', 'USD', 'EUR']
   }),
   computed: {
-    base () {
-      return this.$store.getters.info.bill / (this.rates['.PLN'] / this.rates['.EUR'])
+    base (PLN, EUR) {
+      return this.$store.getters.info.bill / (this.rates[PLN] / this.rates[EUR])
     }
   },
   methods: {
