@@ -17,7 +17,7 @@ export default {
         const uid = await dispatch('getUid')
         await firebase.database().ref(`/users/${uid}/info`).set({
           bill: 10000,
-          name
+          name: name
         })
       } catch (e) {
         commit('setError', e)
