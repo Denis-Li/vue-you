@@ -28,7 +28,8 @@ firebase.initializeApp({
   projectId: 'vue-you-56272',
   storageBucket: 'vue-you-56272.appspot.com',
   messagingSenderId: '241419647088',
-  appId: '1:241419647088:web:7cc6ed07d9f270b9ba1cb5'
+  appId: '1:241419647088:web:7cc6ed07d9f270b9ba1cb5',
+  databaseURL: 'https://vue-you-56272-default-rtdb.europe-west1.firebasedatabase.app/'
 })
 
 let app
