@@ -2,6 +2,17 @@ import firebase from 'firebase/app'
 
 export default {
   actions: {
+    async fetchCategories ({ commit, dispatch }) {
+      try {
+        const uid = await dispatch('getUid')
+        const categories = (await firebase.database().ref(`/users/${uid}/categories`).once('value')).val() || {}
+
+        console.log(categories)
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+    },
     async createCategory ({ commit, dispatch }, { title, limit }) {
       try {
         const uid = await dispatch('getUid')
